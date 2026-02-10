@@ -3,57 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CONQUEST <br> Acheive Greatness </br></title>
+<title>CONQUEST-Achieving Greatness</title>
 
-<!-- Font Awesome for icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 <style>
-/* ---------- BODY ---------- */
+/* ===== GLOBAL ===== */
+* { box-sizing: border-box; }
 body {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: gold; /* body background */
-    color: #333;
+    font-family: Arial, rounded, sans-serif;
+    background-color: rgb(18, 17, 17);
+    color: #ffffff;
     scroll-behavior: smooth;
+    lighting-color: #fdfefe;
 }
 
-/* ---------- HEADER ---------- */
+/* ===== HEADER ===== */
 .header {
-    background-color: #0a3d62; /* header blue */
-    color: white;
-    padding: 40px 20px;
+    background-color: #040404;
+    color: rgb(247, 210, 5);
+    padding: 30px 15px;
     text-align: center;
     position: relative;
 }
-.header h1 {
-    font-size: 70px;
-    font-weight: 900;
-    margin: 0;
-    color: white; /* title text white */
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s, transform 0.8s;
-}
-.header p {
-    font-size: 22px;
-    font-weight: 600;
-    margin-top: 10px;
-    color: white; /* subtitle text white */
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s, transform 0.8s;
-}
-.logo-link {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-}
-.logo { width: 80px; cursor: pointer; }
+.header h1 { font-size: 40px; font-weight: 900; margin: 0; }
+.header p { font-size: medium; font-weight: 600; margin-top: 10px;font-style: italic; color: #feffff; }
+.logo-link { position: relative; top: 12px; left: 10px; }
+.logo { width: 50px; cursor: pointer; }
 
-/* ---------- NAVIGATION ---------- */
+/* ===== NAV ===== */
 nav {
-    background-color: #1e3799;
+    background-color: #fcfdfdd2;
     padding: 10px;
     text-align: center;
     position: sticky;
@@ -61,45 +42,19 @@ nav {
     z-index: 999;
 }
 nav a {
-    color: white;
+    color: rgb(12, 1, 1);
     margin: 0 15px;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: bolder;
 }
 nav a:hover { text-decoration: underline; }
 
-/* ---------- HEADERS ---------- */
-h2.animate-header {
-    font-size: 32px;
-    font-weight: 800;
-    color: #0a3d62;
-    margin-bottom: 20px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s, transform 0.8s;
-}
-h3 {
-    font-size: 22px;
-    font-weight: 700;
-    color: #1e3799;
-    margin-bottom: 8px;
-}
-p { font-size: 16px; line-height: 1.5; }
+/* ===== SECTIONS ===== */
+section { padding: 30px; background: rgb(202, 172, 4); margin: 20px; border-radius: 10px; }
+h2 { font-size: 32px; font-weight: 800; color: #000000; margin-bottom: 20px; text-align: center; }
 
-/* ---------- SECTIONS ---------- */
-section {
-    padding: 30px;
-    background: white;
-    margin: 20px;
-    border-radius: 5px;
-}
-
-/* ---------- HOME SLIDER ---------- */
-.home-slider {
-    position: relative;
-    max-width: 100%;
-    margin: 0 auto;
-}
+/* ===== HOME SLIDER ===== */
+.home-slider { position: relative; max-width: 100%; margin: 0 auto; }
 .slide { display: none; position: relative; }
 .slide.active { display: block; }
 .slide img { width: 100%; height: 400px; object-fit: cover; }
@@ -108,87 +63,117 @@ section {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    color: rgb(252, 248, 248);
+    text-align: center;
+    background: rgba(38, 37, 37, 0.472);
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-family: Arial, Helvetica, sans-serif
+}
+.overlay-text h2 { font-size: 36px; font-weight: 800; margin-bottom: 8px; }
+.overlay-text p { font-size: 50px; font-weight: 800; margin-bottom: 8px; }
+.home-dots { text-align: center; margin-top: 10px; }
+
+/* ===== ABOUT SLIDER ===== */
+.about-slider { max-width: 900px; margin: auto; overflow: hidden; border-radius: 15px; position: relative; }
+.about-slide { display: none; position: relative; }
+.about-slide.active { display: block; }
+.about-slide img { width: 100%; height: 400px; object-fit: cover; }
+.about-slide .overlay-text {
+    font-size: medium;
+    font-weight: 800;
     color: white;
     text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background: rgba(0,0,0,0.4);
     padding: 15px 25px;
     border-radius: 8px;
+}   
+.overlay-text h2 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+.about-prev, .about-next {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: rgb(251, 252, 253);
+    background: rgba(0, 0, 0, 0);
+    padding: 5px 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    user-select: none;
 }
-.overlay-text h2 { font-size: 36px; font-weight: 800; margin:0 0 10px 0; }
-.overlay-text p { font-size: 18px; }
+.about-prev { left: 5px; }
+.about-next { right: 5px; }
 
-/* ---------- ABOUT CAROUSEL ---------- */
-.about-slider { position: relative; max-width: 700px; margin: 0 auto; }
-.about-slide { display: none; }
-.about-slide.active { display: block; }
-.about-slide img { width:100%; height:250px; object-fit:cover; border-radius:8px; }
-.about-text { padding: 10px; font-size: 15px; color: #333; text-align:center; }
-
-/* ---------- SERVICES ---------- */
-.services-gallery { display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; }
-.services-card { width: 220px; background: #f2f2f2; border-radius:8px; text-align:center; padding:15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-
-/* ---------- CONTACT ---------- */
-.contact-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-    margin-top: 25px;
-}
-.contact-card { position: relative; height: 230px; border-radius: 10px; overflow: hidden; }
-.contact-card img { width: 100%; height: 100%; object-fit: cover; }
-.contact-text {
+/* ===== SERVICES ===== */
+.services-section { max-width: 900px; margin: auto; text-align: center; position: relative; }
+.service-card { display: none; position: relative; border-radius: 15px; overflow: hidden; margin: auto; }
+.service-card.active { display: block; }
+.service-card img,
+.service-card video { width: 100%; height: 500px; object-fit: cover; }
+.service-card h3 {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.55);
-    color: white;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 15px;
+    background: rgba(79, 77, 77, 0);
+    color: rgb(255, 255, 255);
+    font-size: 15px;
 }
-.contact-text p {
-    font-size: 16px;
-    margin: 8px 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.contact-text a { color: white; text-decoration: none; }
-.contact-text i {
+.service-prev, .service-next {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
     font-size: 20px;
-    padding: 8px;
+    color: rgb(255, 255, 255);
+    background: rgba(0, 0, 0, 0.011);
+    padding: 5px 10px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.3s, background 0.3s;
+    cursor: pointer;
 }
-.contact-text a i:hover { background: #1e3799; transform: scale(1.1); }
-.contact-text strong { font-weight: bold; }
+.service-prev { left: 1px; }
+.service-next { right: 1px; }
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    background: rgba(83, 81, 81, 0);
+    padding: 10px 10px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+.overlay-text h2 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+.overlay-text p { font-size: 18px; }
 
-/* ---------- FOOTER ---------- */
-footer { text-align: center; padding: 20px; }
+/* ===== CONTACT ===== */
+.contact-section { background: rgb(247, 210, 5); }
+.contact-card { max-width: 450px; margin: auto; background: #000000; padding: 35px; border-radius: 20px; }
+.contact-item { display: flex; align-items: center; gap: 15px; padding: 10px; margin-bottom: 15px; border-radius: 12px; background: rgba(40, 38, 38, 0.924); color: #feffffcb; text-decoration: none; transition: 0.3s; }
+.contact-item i { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #0475ff; }
+.contact-item.whatsapp i { background: #25d366; }
+.contact-item.email i { background: #f97316; }
+.contact-item.location i { background: #dc2626; }
+.contact-item:hover { transform: translateY(-3px); background: rgba(255, 255, 255, 0.188); }
+
+/* ===== FOOTER ===== */
+footer { text-align: center; padding: 20px; font-weight: bold; }
 </style>
 </head>
-
 <body>
 
-<!-- HEADER -->
 <header class="header" id="top">
-    <div class="header-content">
-        <h1 class="animate-header">CONQUEST <br> Acheive Greatness </br> </h1>
-        <p class="animate-header">Quality Services You Can Trust</p>
-    </div>
-    <a href="#top" class="logo-link">
-        <img src="C:\Users\user\OneDrive\Desktop\conquest\images\awards.jpeg" alt="Logo" class="logo">
-    </a>
+    <a href="#top" class="logo-link"><img src="logo.jpeg" class="logo"></a>
+    <h1>CONQUEST <br> Achieving Greatness</h1>
+    <p>Home Of Artz. </p>
 </header>
 
-<!-- NAVIGATION -->
 <nav>
     <a href="#home">Home</a>
     <a href="#about">About</a>
@@ -200,150 +185,116 @@ footer { text-align: center; padding: 20px; }
 <section id="home">
     <div class="home-slider">
         <div class="slide active">
-            <img src="C:\Users\user\OneDrive\Desktop\conquest\images\WhatsApp Image 2026-01-24 at 16.53.21.jpeg" alt="">
-            <div class="overlay-text"><h2>Welcome to Our Business</h2><p>Quality services you can trust</p></div>
+            <img src="home1.png">
+            <div class="overlay-text"><h2></h2><p>Welcome To conquest.</p></div>
         </div>
         <div class="slide">
-            <img src="C:\Users\user\OneDrive\Desktop\conquest\download (2).jfif" alt="">
-            <div class="overlay-text"><h2>Your Satisfaction Is Our Priority</h2><p>Professional solutions for everyone</p></div>
+            <img src="home2.jpg">
+            <div class="overlay-text"><h2></h2><p>A One Stop Site for Artz.</p></div>
         </div>
         <div class="slide">
-            <img src="C:\Users\user\OneDrive\Desktop\conquest\tshirt-print-using-heat-press-machine-shirt-printing-228952858.webp" alt="">
-            <div class="overlay-text"><h2>Grow with Us</h2><p>Innovation and excellence</p></div>
+            <img src="home31.jpg">
+            <div class="overlay-text"><h2></h2><p>Your Satisfaction Is Our Priority.</p></div>
         </div>
-        <div class="dots home-dots"></div>
+        <div class="home-dots"></div>
     </div>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
-    <h2 class="animate-header">About Us</h2>
+    <h2>About Us</h2>
     <div class="about-slider">
-        <div class="about-slide active">
-            <img src="C:\Users\user\OneDrive\Desktop\conquest\Untitled-1.jpg" alt="">
-            <div class="about-text"><p>Our professional team delivering quality service.</p></div>
-        </div>
-        <div class="about-slide">
-            <img src="C:\Users\user\OneDrive\Desktop\conquest\download (4).jfif" alt="CONQUEST">
-            <div class="about-text"><p>A Place for quality awards creation service.</p></div>
-        </div>
-        <div class="about-slide">
-            <img src="C:\Users\user\OneDrive\Desktop\conquest\download (5).jfif" alt="CONQUEST">
-            <div class="about-text"><p>Quality and Beautiful framing Services.</p></div>
-        </div>
-        <div class="about-slide">
-            <img src="C:\Users\user\OneDrive\Desktop\conquest\t-shirt-business-names.png" alt="CONQUEST">
-            <div class="about-text"><p>Quality Printz on t-shirts.</p></div>
-        </div>
-        <div class="about-slide">
-            <img src="C:\Users\user\OneDrive\Desktop\conquest\zebra-blinds.jpg" alt="CONQUEST">
-            <div class="about-text"><p>Good home design freindly Windows blinds.</p></div>
-        </div>
-        <a class="about-prev">&#10094;</a>
-        <a class="about-next">&#10095;</a>
-        <div class="about-dots"></div>
+        <div class="about-slide active"><img src="neee.jpg"><div class="overlay-text">OUR MISSION: <br>Meeting the Need and Want of Our Potential Customers.</div> </div>
+        <div class="about-slide"><img src="meee.jpg"><div class="overlay-text">OUR VISION: <br> To Provide The Best Customer Service Possible And to Deliver An Unmatched Service In The Best Possible Way.</div></div>
+        <div class="about-prev">&#10094;</div>
+        <div class="about-next">&#10095;</div>
     </div>
 </section>
 
 <!-- SERVICES -->
 <section id="services">
-    <h2 class="animate-header">Our Services</h2>
-    <div class="services-gallery">
-        <div class="services-card"><h3>Service One</h3><p>We offer Awards services for all organizations.</p></div>
-        <div class="services-card"><h3>Service Two</h3><p>Quality picture framing and printz on t-shirts.</p></div>
-        <div class="services-card"><h3>Service Three</h3><p>Best Windows Blinds ever seen.</p></div>
+    <h2>Our Services</h2>
+    <div class="services-section">
+        <div class="service-card active"><img src="service1.jpg"><h3>We offer good graphic design for all events and with affordable prices.</h3><p></p></div>
+        <div class="service-card"><img src="service2.jpg"><h3>Professional & Exceptional Picture Framing of all Sizes.</h3><p></p></div>
+        <div class="service-card"><img src="service31.jpg"><h3>Quality and Top Notch Artz of various Types. </h3><p></p></div>
+        <div class="service-card"><img src="about2.jpg"><h3>Good Home Design-Friendly Windows Blinds.</h3><p></p></div>
+        <div class="service-card"><img src="service5.jpg"><h3>We also Offer Printing Services of Different Kinds.</h3></div>
+        <div class="service-prev">&#10094;</div>
+        <div class="service-next">&#10095;</div>
     </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
-    <h2 class="animate-header">Contact Us</h2>
-    <div class="contact-gallery">
-        <div class="contact-card">
-            <img src="C:\Users\user\OneDrive\Desktop\conquest\download.png" alt="">
-            <div class="contact-text">
-                <h3>Call & Chat</h3>
-                <p><a href="tel:09131522875"><i class="fas fa-phone"></i></a> +2349131522875</p>
-                <p><a href="https://wa.me/2347044505593" target="_blank"><i class="fab fa-whatsapp"></i></a> Chat with us</p>
-                <p><i class="fas fa-map-marker-alt"></i> <strong>By Etinan main Round About, Etinan, Akwa Ibom State.</strong></p>
-            </div>
-        </div>
+<section id="contact" class="contact-section">
+    <h2 style="color:rgb(10, 10, 10);font-style: italic;font-size: medium;">For futher Enquries contact us via the links Below.</h2>
+    <div class="contact-card">
+        <a href="tel:09131522875" class="contact-item"><i class="fas fa-phone"></i> Call Us</a>
+        <a href="tel:08165174497" class="contact-item"><i class="fas fa-phone"></i> Call Us</a>
+        <a href="https://wa.me/2347044505593" class="contact-item whatsapp"><i class="fab fa-whatsapp"></i> Chat With Us</a>
+        <a href="https://wa.me/2349034731765" class="contact-item whatsapp"><i class="fab fa-whatsapp"></i> Chat With Us</a>
+        <a href="mailto:conquest4greatness@gmail.com" class="contact-item email"><i class="fas fa-envelope"></i> conquest4greatness@gmail.com</a>
+        <div class="contact-item location"><i class="fas fa-map-marker-alt"></i> By Etinan Main Roundabout, Etinan, Akwa Ibom State</div>
     </div>
 </section>
 
 <footer>
-    <p>&copy;CONQUEST <br> Acheive Greatness </br> . All Rights Reserved.</p>
+    &copy; CONQUEST — Achieving Greatness<br> All Rights Reserved </br>
 </footer>
 
 <script>
-// Header animation
-const headers = document.querySelectorAll('.animate-header');
-function revealOnScroll() {
-    const trigger = window.innerHeight*0.85;
-    headers.forEach(h=>{
-        const top = h.getBoundingClientRect().top;
-        if(top < trigger){h.style.opacity=1; h.style.transform='translateY(0)';}
-    });
-}
-window.addEventListener('scroll', revealOnScroll);
-window.addEventListener('load', revealOnScroll);
-
-// Home slider
+/* ===== HOME SLIDER ===== */
 let homeIndex = 0;
 const homeSlides = document.querySelectorAll(".home-slider .slide");
 const homeDotsBox = document.querySelector(".home-dots");
-homeSlides.forEach((_,i)=>{
-    const dot=document.createElement("span");
-    dot.style.cursor="pointer";
-    dot.onclick=()=>showHomeSlide(i);
-    homeDotsBox.appendChild(dot);
-});
-const homeDots = homeDotsBox.children;
-function showHomeSlide(i){
-    homeSlides.forEach(s=>s.classList.remove("active"));
-    [...homeDots].forEach(d=>d.classList.remove("active"));
-    homeSlides[i].classList.add("active");
-    homeDots[i].classList.add("active");
-    homeIndex=i;
-}
-function autoHomeSlide(){homeIndex=(homeIndex+1)%homeSlides.length;showHomeSlide(homeIndex);}
-setInterval(autoHomeSlide,5000);
-showHomeSlide(0);
 
-// About slider
-let aboutIndex = 0;
-const aboutSlides = document.querySelectorAll(".about-slide");
-const aboutDotsBox = document.querySelector(".about-dots");
-aboutSlides.forEach((_, i) => {
+homeSlides.forEach((_, i) => {
     const dot = document.createElement("span");
-    dot.style.cursor = "pointer";
     dot.style.height = "12px";
     dot.style.width = "12px";
     dot.style.margin = "0 4px";
     dot.style.background = "#bbb";
     dot.style.borderRadius = "50%";
     dot.style.display = "inline-block";
-    dot.onclick = () => showAboutSlide(i);
-    aboutDotsBox.appendChild(dot);
+    dot.style.cursor = "pointer";
+    dot.onclick = () => showHomeSlide(i);
+    homeDotsBox.appendChild(dot);
 });
-const aboutDots = aboutDotsBox.children;
+
+const homeDots = homeDotsBox.children;
+
+function showHomeSlide(i) {
+    homeSlides.forEach(s => s.classList.remove("active"));
+    [...homeDots].forEach(d => d.style.background = "#bbb");
+    homeSlides[i].classList.add("active");
+    homeDots[i].style.background = "#1e3799";
+    homeIndex = i;
+}
+function autoHomeSlide() { homeIndex = (homeIndex + 1) % homeSlides.length; showHomeSlide(homeIndex); }
+setInterval(autoHomeSlide, 5000);
+showHomeSlide(0);
+
+/* ===== ABOUT SLIDER ===== */
+let aboutIndex = 0;
+const aboutSlides = document.querySelectorAll(".about-slide");
 function showAboutSlide(i) {
-    aboutSlides.forEach(s => s.classList.remove("active"));
-    [...aboutDots].forEach(d => d.style.background = "#bbb");
+    aboutSlides.forEach(slide => slide.classList.remove("active"));
     aboutSlides[i].classList.add("active");
-    aboutDots[i].style.background = "#1e3799";
     aboutIndex = i;
 }
-document.querySelector(".about-prev").onclick = () => {
-    aboutIndex = (aboutIndex - 1 + aboutSlides.length) % aboutSlides.length;
-    showAboutSlide(aboutIndex);
-};
-document.querySelector(".about-next").onclick = () => {
-    aboutIndex = (aboutIndex + 1) % aboutSlides.length;
-    showAboutSlide(aboutIndex);
-};
-setInterval(() => { aboutIndex = (aboutIndex + 1) % aboutSlides.length; showAboutSlide(aboutIndex); }, 5000);
-showAboutSlide(0);
+document.querySelector(".about-prev").onclick = () => showAboutSlide((aboutIndex - 1 + aboutSlides.length) % aboutSlides.length);
+document.querySelector(".about-next").onclick = () => showAboutSlide((aboutIndex + 1) % aboutSlides.length);
+
+/* ===== SERVICES MANUAL CAROUSEL ===== */
+let serviceIndex = 0;
+const services = document.querySelectorAll(".service-card");
+function showService(i) {
+    services.forEach(s => s.classList.remove("active"));
+    services[i].classList.add("active");
+    serviceIndex = i;
+}
+document.querySelector(".service-prev").onclick = () => showService((serviceIndex - 1 + services.length) % services.length);
+document.querySelector(".service-next").onclick = () => showService((serviceIndex + 1) % services.length);
 </script>
 
 </body>
