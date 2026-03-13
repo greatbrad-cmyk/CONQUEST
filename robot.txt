@@ -1,4 +1,6 @@
-User-agent: *
+User-agent: *1+2
 Disallow:
 
 Sitemap: https://conquestartz.netlify.app/sitemap.xml
+appB
+....
