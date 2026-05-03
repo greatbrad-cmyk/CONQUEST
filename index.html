@@ -9,118 +9,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
-    <style>
-        :root {
-            --gold: #D4AF37;
-            --dark: #0a0a0a;
-            --glass: rgba(255, 255, 255, 0.05);
-            --text: #f5f5f5;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; background: var(--dark); color: var(--text); line-height: 1.6; overflow-x: hidden; }
-
-        header { padding: 40px 20px; text-align: center; background: linear-gradient(#1a1a1a, #0a0a0a); }
-        .logo { width: 90px; filter: drop-shadow(0 0 10px var(--gold)); margin-bottom: 15px; }
-        h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 8vw, 3.5rem); background: linear-gradient(to right, #fff, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        nav { background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px); padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--glass); display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
-        nav a { color: #fff; text-decoration: none; font-weight: 500; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; padding: 5px 10px; transition: 0.3s; }
-        nav a:hover { color: var(--gold); }
-
-        section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
-        h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; text-align: center; margin-bottom: 40px; color: var(--gold); }
-
-        /* Contact Form Styling */
-.contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.contact-form input, 
-.contact-form textarea {
-    background: var(--glass);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 15px;
-    border-radius: 10px;
-    color: #fff;
-    font-family: 'Inter', sans-serif;
-    outline: none;
-    transition: 0.3s;
-}
-
-.contact-form input:focus, 
-.contact-form textarea:focus {
-    border-color: var(--gold);
-    background: rgba(255, 255, 255, 0.08);
-}
-
-/* Button Styling */
-.btn {
-    background: var(--gold);
-    color: var(--dark);
-    padding: 15px 30px;
-    border: none;
-    border-radius: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    background: #fff;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
-}
-
-        /* Slider */
-        .slider { position: relative; height: 60vh; border-radius: 20px; overflow: hidden; background: #000; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-        .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.5s ease-in-out; }
-        .slide.active { opacity: 1; z-index: 1; }
-        .slide img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.5); }
-        .slide-text { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; z-index: 2; }
-        .slide-text p { font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 700; color: #fff; }
-
-        /* Ecosystem / Subs Styling */
-        .subs-vertical { display: flex; flex-direction: column; gap: 20px; max-width: 800px; margin: 0 auto; }
-        .sub-item { background: var(--glass); padding: 30px; border-left: 4px solid var(--gold); border-radius: 0 15px 15px 0; display: flex; align-items: center; gap: 25px; transition: 0.3s; }
-        .sub-item:hover { transform: translateX(10px); background: rgba(212, 175, 55, 0.1); }
-        .sub-item i { font-size: 2.5rem; color: var(--gold); min-width: 60px; text-align: center; }
-
-        /* Services Grid */
-        .grid { display: grid; grid-template-columns: 1fr; gap: 60px; }
-        .card { display: flex; align-items: center; gap: 50px; text-align: left; }
-        .card:nth-child(even) { flex-direction: row-reverse; text-align: right; }
-        .image-container { width: 380px; height: 260px; background: var(--glass); border: 1px solid var(--glass); border-radius: 20px; padding: 12px; flex-shrink: 0; transition: all 0.5s ease; }
-        .image-container img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
-
-        /* Gallery */
-        .gallery { line-height: 0; column-count: 4; column-gap: 15px; }
-        .gallery-item { margin-bottom: 15px; break-inside: avoid; }
-        .gallery-item img { width: 100%; border-radius: 10px; border: 1px solid var(--glass); }
-
-        /* CEO White Section */
-        .ceo-section { background: #ffffff; color: #1a1a1a; padding: 100px 20px; border-radius: 60px 60px 0 0; margin-top: 60px; text-align: center; }
-        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-        footer { background: #fff; text-align: center; padding: 40px; color: #888; border-top: 1px solid #eee; }
-
-        @media (max-width: 768px) {
-            .card, .card:nth-child(even) { flex-direction: column; text-align: center; }
-            .image-container { width: 100%; }
-            .sub-item { flex-direction: column; text-align: center; border-left: none; border-top: 4px solid var(--gold); border-radius: 15px; }
-            .gallery { column-count: 2; }
-            .ceo-content { flex-direction: column !important; }
-        }
-
-        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-    </style>
+    <link rel="stylesheet" content="stylesheet" href="main.css"
+   
 </head>
 <body>
+
+    <div id="welcome-overlay">
+    <video id="welcome-video" autoplay muted loop playsinline>
+        <source src="welcome.mp4" type="video/mp4"> Your browser does not support the video tag.
+    </video>
+    <div class="video-content">
+        <h2 style="color: rgb(255, 255, 255); margin-bottom: 20px; font-size: 2.5rem;">CONQUEST</h2>
+        <button class="enter-btn" onclick="enterSite()">Skip</button>
+    </div>
+</div>
+
 
 <header>
     <img src="logo 1.png" class="logo" alt="Conquest">
@@ -164,21 +67,21 @@
     <h2>Conquest Ecosystem</h2>
     <div class="subs-vertical">
         <div class="sub-item">
-            <i class="fas fa-palette"></i>
+            <i class="fas fa-palette" style="color: darkgoldenrod;"></i>
             <div>
                 <h4>Conquest Media</h4>
                 <p>Strategic graphic design and branding solutions.</p>
             </div>
         </div>
         <div class="sub-item">
-            <i class="fas fa-print"></i>
+            <i class="fas fa-print" style="color: darkgoldenrod"></i>
             <div>
                 <h4>Conquest Prints</h4>
-                <p>High-quality customized T-shirt printing and paper prints.</p>
+                <p>High-quality customized T-shirt printing and pro branding skills.</p>
             </div>
         </div>
         <div class="sub-item">
-            <i class="fas fa-couch"></i> <div>
+            <i class="fas fa-couch" style="color: darkgoldenrod"></i> <div>
                 <h4>Conquest Frames And Face</h4>
                 <p>Premium picture framing and modern window blind installations.</p>
             </div>
@@ -198,16 +101,16 @@
             <div class="card-content"><h3>Picture Framing</h3><p>Professional framing of all sizes to preserve your most cherished memories.</p></div>
         </div>
         <div class="card">
-            <div class="image-container"><img src="Winodow Blind.png" alt="Blinds"></div>
-            <div class="card-content"><h3>Window Blinds</h3><p>Modern interior window solutions designed for style and privacy.</p></div>
-        </div>
-        <div class="card">
             <div class="image-container"><img src="printz.png" alt="Prints"></div>
             <div class="card-content"><h3>Prints on T-Shirts</h3><p>High-quality customized apparel featuring modern professional printing.</p></div>
         </div>
         <div class="card">
             <div class="image-container"><img src="Awards.png" alt="Awards"></div>
             <div class="card-content"><h3>Awards Making</h3><p>Modern, classic, and professional awards to honor every achievement.</p></div>
+        </div>
+        <div class="card">
+            <div class="image-container"><img src="Home.jpeg" alt="Others"></div>
+            <div class="card-content"><h3>...and lots more</h3><p>We offer other kinds of art services. Contact us for more details</p></div>
         </div>
     </div>
 </section>
@@ -217,7 +120,7 @@
     <div class="gallery">
         <div class="gallery-item"><a href="work.png" data-lightbox="work"><img src="work.png" alt="W1"></a></div>
         <div class="gallery-item"><a href="work2.png" data-lightbox="work"><img src="work2.png" alt="W2"></a></div>
-        <div class="gallery-item"><a href="about2.jpg" data-lightbox="work"><img src="about2.jpg" alt="W3"></a></div>
+        <div class="gallery-item"><a href="work4.jpeg" data-lightbox="work"><img src="work4.jpeg" alt="W3"></a></div>
         <div class="gallery-item"><a href="Flyer CONQUEST (1).png" data-lightbox="work"><img src="Flyer CONQUEST (1).png" alt="W4"></a></div>
         <div class="gallery-item"><a href="gallery 2.jpg" data-lightbox="work"><img src="gallery 2.jpg" alt="W5"></a></div>
         <div class="gallery-item"><a href="home2.jpg" data-lightbox="work"><img src="home2.jpg" alt="W6"></a></div>
@@ -277,6 +180,12 @@
             slides[current].classList.add('active');
         }
     }, 5000);
+
+    function enterSite() {
+        const overlay = document.getElementById('welcome-overlay');
+        overlay.classList.add('hidden');
+        // Optional: Unmute video or start other animations here
+    }
 
     function reveal() {
         document.querySelectorAll(".reveal").forEach(el => {
