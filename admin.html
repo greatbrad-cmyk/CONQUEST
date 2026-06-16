@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <title>Conquest Artz - Admin Panel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f0f0f;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .admin-container {
+            width: 100%;
+            max-width: 700px;
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.8);
+        }
+
+        .admin-container h1 {
+            font-size: 28px;
+            margin-bottom: 4px;
+            color: #e50914;
+        }
+
+        .admin-container .subtitle {
+            color: #aaa;
+            margin-bottom: 24px;
+            font-size: 16px;
+        }
+
+        .admin-password {
+            margin-bottom: 16px;
+        }
+
+        .admin-password input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            background: #0f0f0f;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .admin-password input:focus {
+            border-color: #e50914;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #e50914;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 8px;
+        }
+
+        .btn:hover {
+            background: #b20710;
+        }
+
+        .btn-secondary {
+            background: #333;
+            margin-top: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: #444;
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 14px;
+            width: auto;
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #ccc;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            background: #0f0f0f;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #e50914;
+        }
+
+        .result-box {
+            margin-top: 24px;
+            padding: 20px;
+            background: #0f0f0f;
+            border-radius: 8px;
+            border: 2px solid #333;
+            display: none;
+        }
+
+        .result-box .link-label {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .result-box .link {
+            color: #e50914;
+            font-size: 18px;
+            word-break: break-all;
+            margin: 6px 0;
+            font-weight: bold;
+        }
+
+        .result-box .code-label {
+            color: #aaa;
+            font-size: 14px;
+            margin-top: 12px;
+        }
+
+        .result-box .code {
+            color: #fff;
+            font-size: 24px;
+            letter-spacing: 4px;
+            background: #1a1a1a;
+            padding: 8px 16px;
+            border-radius: 6px;
+            display: inline-block;
+            margin: 4px 0;
+            font-weight: bold;
+        }
+
+        .copy-btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 6px;
+            background: #e50914;
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 12px;
+            transition: background 0.3s;
+            font-size: 14px;
+        }
+
+        .copy-btn:hover {
+            background: #b20710;
+        }
+
+        .generated-list {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        .generated-list h3 {
+            color: #aaa;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 14px;
+            background: #0f0f0f;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+            gap: 8px;
+            border-left: 3px solid #e50914;
+        }
+
+        .list-item .client-info {
+            color: #fff;
+            font-size: 14px;
+            flex: 1;
+        }
+
+        .list-item .client-info strong {
+            color: #fff;
+        }
+
+        .list-item .client-info span {
+            color: #888;
+        }
+
+        .list-item .client-info .date {
+            font-size: 11px;
+            color: #555;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .list-item .list-code {
+            color: #e50914;
+            font-weight: bold;
+            font-size: 14px;
+            background: #1a1a1a;
+            padding: 4px 12px;
+            border-radius: 4px;
+            letter-spacing: 2px;
+        }
+
+        .list-item .actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .list-item .actions button {
+            padding: 4px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .list-item .actions .copy-link-btn {
+            background: #e50914;
+            color: #fff;
+        }
+
+        .list-item .actions .copy-link-btn:hover {
+            background: #b20710;
+        }
+
+        .list-item .actions .delete-btn {
+            background: #333;
+            color: #888;
+        }
+
+        .list-item .actions .delete-btn:hover {
+            background: #e50914;
+            color: #fff;
+        }
+
+        .empty-msg {
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        #passError {
+            color: #e50914;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a1a;
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 12px;
+            border: 2px solid #e50914;
+            font-size: 14px;
+            display: none;
+            z-index: 999;
+            animation: fadeInUp 0.3s ease;
+            max-width: 90%;
+            text-align: center;
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stats .stat-box {
+            background: #0f0f0f;
+            padding: 12px 20px;
+            border-radius: 8px;
+            flex: 1;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .stats .stat-box .number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e50914;
+        }
+
+        .stats .stat-box .label {
+            font-size: 12px;
+            color: #888;
+            margin-top: 2px;
+        }
+
+        @media (max-width: 600px) {
+            .admin-container {
+                padding: 24px 16px;
+            }
+
+            .admin-container h1 {
+                font-size: 22px;
+            }
+
+            .result-box .link {
+                font-size: 14px;
+            }
+
+            .list-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .list-item .actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .stats {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-container">
+        <h1>Admin Panel</h1>
+        <p class="subtitle">Generate unique links for your clients</p>
+
+        <!-- Password Protection -->
+        <div class="admin-password" id="passwordSection">
+            <input type="password" id="adminPassword" placeholder="Enter admin password" />
+            <button class="btn" onclick="verifyPassword()">Unlock Panel</button>
+            <div id="passError">Incorrect password. Please try again.</div>
+        </div>
+
+        <!-- Main Form (Hidden until password) -->
+        <div id="mainForm" class="hidden">
+
+            <!-- Stats -->
+            <div class="stats" id="statsSection">
+                <div class="stat-box">
+                    <div class="number" id="totalLinks">0</div>
+                    <div class="label">Total Links</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number" id="activeLinks">0</div>
+                    <div class="label">Active</div>
+                </div>
+            </div>
+
+            <!-- Generate Form -->
+            <div class="form-group">
+                <label>Client Name</label>
+                <input type="text" id="clientName" placeholder="e.g., John & Jane" />
+            </div>
+
+            <div class="form-group">
+                <label>Event Name</label>
+                <input type="text" id="eventName" placeholder="e.g., Wedding Ceremony" />
+            </div>
+
+            <button class="btn" onclick="generateLink()">Generate Unique Link</button>
+
+            <!-- Result Box -->
+            <div id="resultBox" class="result-box">
+                <div class="link-label">Unique Link</div>
+                <div class="link" id="generatedLink">https://conquestartz.netlify.app/live.html?code=ABC123</div>
+                <button class="copy-btn" onclick="copyLink()">Copy Link</button>
+
+                <div class="code-label">Access Code</div>
+                <div class="code" id="generatedCode">ABC123</div>
+
+                <button class="btn btn-secondary" onclick="resetForm()">Generate Another</button>
+            </div>
+
+            <!-- Generated Links History -->
+            <div class="generated-list" id="historySection">
+                <h3>📋 Generated Links</h3>
+                <div id="historyList">
+                    <div class="empty-msg">No links generated yet</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+
+    <script>
+        // =============================================
+        // 🔐 CONFIG - SET YOUR PASSWORD HERE!
+        // =============================================
+        const ADMIN_PASSWORD = "CONquest12."; // CHANGE THIS!
+        const BASE_URL = "https://conquestartz.netlify.app/live.html?code=";
+
+        // =============================================
+        // 🚀 STATE
+        // =============================================
+        let generatedLinks = [];
+        let currentGeneratedCode = '';
+
+        // =============================================
+        // 🔑 PASSWORD FUNCTIONS
+        // =============================================
+
+        function verifyPassword() {
+            const input = document.getElementById('adminPassword');
+            const error = document.getElementById('passError');
+
+            if (input.value === ADMIN_PASSWORD) {
+                document.getElementById('passwordSection').classList.add('hidden');
+                document.getElementById('mainForm').classList.remove('hidden');
+                error.style.display = 'none';
+                loadHistory();
+                updateStats();
+                document.getElementById('clientName').focus();
+            } else {
+                error.style.display = 'block';
+                input.value = '';
+                input.focus();
+            }
+        }
+
+        document.getElementById('adminPassword').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') verifyPassword();
+        });
+
+        // =============================================
+        // 🎲 GENERATE LINK
+        // =============================================
+
+        function generateLink() {
+            const client = document.getElementById('clientName').value.trim();
+            const event = document.getElementById('eventName').value.trim();
+
+            if (!client || !event) {
+                showToast('Please enter both client name and event name.');
+                return;
+            }
+
+            // Generate random 6-character code
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let code = '';
+            for (let i = 0; i < 6; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+
+            // Check if code already exists (regenerate if needed)
+            let attempts = 0;
+            while (generatedLinks.some(item => item.code === code) && attempts < 10) {
+                code = '';
+                for (let i = 0; i < 6; i++) {
+                    code += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                attempts++;
+            }
+
+            const link = BASE_URL + code;
+            currentGeneratedCode = code;
+
+            // Save to history
+            const entry = {
+                code: code,
+                client: client,
+                event: event,
+                link: link,
+                date: new Date().toLocaleDateString(),
+                time: new Date().toLocaleTimeString(),
+                active: true
+            };
+
+            generatedLinks.push(entry);
+            saveHistory();
+
+            // Display result
+            document.getElementById('generatedLink').textContent = link;
+            document.getElementById('generatedCode').textContent = code;
+            document.getElementById('resultBox').style.display = 'block';
+
+            // Update history
+            renderHistory();
+            updateStats();
+
+            // Clear inputs but keep client name for quick next entry
+            document.getElementById('eventName').value = '';
+            document.getElementById('clientName').focus();
+            document.getElementById('clientName').select();
+
+            showToast(`✅ Link generated for ${client}!`);
+        }
+
+        // =============================================
+        // 📋 COPY FUNCTIONS
+        // =============================================
+
+        function copyLink() {
+            const link = document.getElementById('generatedLink').textContent;
+            copyToClipboard(link, 'Link copied to clipboard!');
+        }
+
+        function copyLinkFromHistory(link) {
+            copyToClipboard(link, 'Link copied to clipboard!');
+        }
+
+        function copyToClipboard(text, message) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast(message);
+                }).catch(() => {
+                    fallbackCopy(text, message);
+                });
+            } else {
+                fallbackCopy(text, message);
+            }
+        }
+
+        function fallbackCopy(text, message) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.left = '-9999px';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast(message);
+            } catch (e) {
+                showToast('Failed to copy. Please copy manually.');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // =============================================
+        // 🗑️ DELETE FUNCTIONS
+        // =============================================
+
+        function deleteLink(code) {
+            if (!confirm(`Delete link for "${generatedLinks.find(l => l.code === code)?.client}"?`)) return;
+
+            generatedLinks = generatedLinks.filter(item => item.code !== code);
+            saveHistory();
+            renderHistory();
+            updateStats();
+            showToast('🗑️ Link deleted.');
+        }
+
+        // =============================================
+        // 💾 STORAGE FUNCTIONS
+        // =============================================
+
+        function saveHistory() {
+            try {
+                localStorage.setItem('conquestLinks', JSON.stringify(generatedLinks));
+                // Also update the live page if open
+                try {
+                    localStorage.setItem('conquestLinks_updated', Date.now().toString());
+                } catch (e) {}
+            } catch (e) {
+                console.error('Error saving history:', e);
+            }
+        }
+
+        function loadHistory() {
+            try {
+                const data = localStorage.getItem('conquestLinks');
+                if (data) {
+                    generatedLinks = JSON.parse(data);
+                    renderHistory();
+                    updateStats();
+                }
+            } catch (e) {
+                console.error('Error loading history:', e);
+            }
+        }
+
+        // =============================================
+        // 🖥️ RENDER FUNCTIONS
+        // =============================================
+
+        function renderHistory() {
+            const container = document.getElementById('historyList');
+            container.innerHTML = '';
+
+            if (generatedLinks.length === 0) {
+                container.innerHTML = '<div class="empty-msg">No links generated yet</div>';
+                return;
+            }
+
+            // Show most recent first
+            const sorted = [...generatedLinks].reverse();
+            sorted.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'list-item';
+                div.innerHTML = `
+                    <div class="client-info">
+                        <strong>${escapeHtml(item.client)}</strong> <span>·</span> ${escapeHtml(item.event)}
+                        <span class="date">${item.date} at ${item.time}</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                        <span class="list-code">${item.code}</span>
+                        <div class="actions">
+                            <button class="copy-link-btn" onclick="copyLinkFromHistory('${item.link}')">📋 Copy</button>
+                            <button class="delete-btn" onclick="deleteLink('${item.code}')">✕</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function updateStats() {
+            document.getElementById('totalLinks').textContent = generatedLinks.length;
+            document.getElementById('activeLinks').textContent = generatedLinks.filter(l => l.active !== false).length;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // =============================================
+        // 🧹 RESET FORM
+        // =============================================
+
+        function resetForm() {
+            document.getElementById('resultBox').style.display = 'none';
+            document.getElementById('clientName').focus();
+            document.getElementById('clientName').select();
+        }
+
+        // =============================================
+        // 🔔 TOAST NOTIFICATION
+        // =============================================
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        // =============================================
+        // ⌨️ ENTER KEY SUPPORT
+        // =============================================
+
+        document.getElementById('clientName').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') document.getElementById('eventName').focus();
+        });
+
+        document.getElementById('eventName').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') generateLink();
+        });
+
+        // =============================================
+        // 🚀 INIT
+        // =============================================
+
+        console.log('🔐 Conquest Artz Admin Panel');
+        console.log('📋 Generated links will be stored in your browser.');
+        console.log('🔑 Default password: conquest2025 (CHANGE THIS!)');
+    </script>
+
+</body>
+</html>

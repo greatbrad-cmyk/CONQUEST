@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <title>Conquest Artz - Live Stream</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f0f0f;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: #1a1a1a;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e50914;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #e50914;
+        }
+
+        .live-badge {
+            background: #e50914;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            animation: pulse 1.5s infinite;
+            display: inline-block;
+        }
+
+        .offline-badge {
+            background: #555;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            justify-content: center;
+        }
+
+        .access-container {
+            width: 100%;
+            max-width: 500px;
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.8);
+        }
+
+        .access-container h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .access-container p {
+            color: #aaa;
+            margin-bottom: 24px;
+            font-size: 16px;
+        }
+
+        .access-container input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            background: #0f0f0f;
+            color: #fff;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.3s;
+            margin-bottom: 16px;
+        }
+
+        .access-container input:focus {
+            border-color: #e50914;
+        }
+
+        .access-container .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #e50914;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .access-container .btn:hover {
+            background: #b20710;
+        }
+
+        .access-container .error {
+            color: #e50914;
+            font-size: 14px;
+            margin-top: 12px;
+            display: none;
+        }
+
+        .video-container {
+            width: 100%;
+            max-width: 1100px;
+            background: #000;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.8);
+            display: none;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 600px;
+            display: block;
+            background: #000;
+        }
+
+        .stream-info {
+            width: 100%;
+            max-width: 1100px;
+            margin-top: 24px;
+            padding: 20px 24px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            display: none;
+        }
+
+        .stream-info h2 {
+            font-size: 26px;
+            margin-bottom: 8px;
+        }
+
+        .stream-info p {
+            color: #aaa;
+            font-size: 16px;
+        }
+
+        .stream-info .status {
+            font-weight: bold;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status .dot {
+            width: 12px;
+            height: 12px;
+            background: #e50914;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        .status .dot.offline {
+            background: #555;
+            animation: none;
+        }
+
+        .status .live-text {
+            color: #e50914;
+        }
+
+        .status .offline-text {
+            color: #888;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 16px;
+            color: #e50914;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            background: #1a1a1a;
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #333;
+            margin-top: 40px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .offline-msg {
+            color: #888;
+            font-size: 18px;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .offline-msg .icon {
+            font-size: 64px;
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .offline-msg .sub {
+            font-size: 14px;
+            color: #555;
+            margin-top: 8px;
+        }
+
+        .broadcast-controls {
+            width: 100%;
+            max-width: 1100px;
+            margin-top: 20px;
+            padding: 24px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            border: 1px solid rgba(212, 168, 67, 0.2);
+            display: none;
+        }
+
+        .broadcast-controls h3 {
+            color: #e50914;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .broadcast-controls p {
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .broadcast-controls .btn-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .broadcast-controls .btn-group button {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+
+        .btn-start {
+            background: #e50914;
+            color: #fff;
+        }
+
+        .btn-start:hover {
+            background: #b20710;
+            transform: scale(1.02);
+        }
+
+        .btn-start:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-stop {
+            background: #555;
+            color: #fff;
+        }
+
+        .btn-stop:hover {
+            background: #777;
+        }
+
+        .btn-stop:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        #broadcastStatus {
+            color: #888;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+        .admin-password-section {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 24px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(212, 168, 67, 0.2);
+            display: block;
+        }
+
+        .admin-password-section p {
+            color: #aaa;
+            margin-bottom: 12px;
+        }
+
+        .admin-password-section input {
+            padding: 12px 18px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            background: #0f0f0f;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            width: 220px;
+            margin-right: 8px;
+        }
+
+        .admin-password-section input:focus {
+            border-color: #e50914;
+        }
+
+        .admin-password-section .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            background: #e50914;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .admin-password-section .btn:hover {
+            background: #b20710;
+        }
+
+        .admin-password-section .error {
+            color: #e50914;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a1a;
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 12px;
+            border: 2px solid #e50914;
+            font-size: 15px;
+            z-index: 999;
+            max-width: 90%;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 16px 20px;
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+            .logo {
+                font-size: 22px;
+            }
+            .video-container video {
+                height: 300px;
+            }
+            .access-container {
+                padding: 24px 20px;
+                margin: 0 12px;
+            }
+            .access-container h2 {
+                font-size: 22px;
+            }
+            .stream-info h2 {
+                font-size: 20px;
+            }
+            .main {
+                padding: 20px 12px;
+            }
+            .broadcast-controls .btn-group button {
+                width: 100%;
+            }
+            .admin-password-section input {
+                width: 100%;
+                margin-bottom: 8px;
+                margin-right: 0;
+            }
+            .admin-password-section .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">Conquest <span>Stream Space</span></div>
+        <div>
+            <span id="liveBadge" class="offline-badge">● OFFLINE</span>
+        </div>
+    </header>
+
+    <main class="main">
+
+        <!-- ACCESS FORM -->
+        <div id="accessContainer" class="access-container">
+            <h2>Enter Access Code</h2>
+            <p>Enter the unique code provided by Conquest Artz</p>
+            <input type="text" id="accessCode" placeholder="e.g., WED123" maxlength="20" autofocus />
+            <button class="btn" onclick="verifyAccess()">Access Live Stream</button>
+            <div id="errorMsg" class="error">Invalid code. Please try again.</div>
+        </div>
+
+        <!-- ADMIN PASSWORD -->
+        <div id="adminPasswordSection" class="admin-password-section">
+            <p><strong style="color:#fff;">Creator Access</strong> — Enter your admin password to go live</p>
+            <input type="password" id="adminPasswordInput" placeholder="Admin password" />
+            <button class="btn" onclick="verifyAdminPassword()">Unlock Broadcast</button>
+            <div id="adminError" class="error">Incorrect password</div>
+        </div>
+
+        <!-- VIDEO PLAYER -->
+        <div id="videoContainer" class="video-container">
+            <div id="offlineMsg" class="offline-msg">
+                <span class="icon">📡</span>
+                <div>Stream is currently offline</div>
+                <div class="sub">The broadcaster will start streaming soon</div>
+            </div>
+            <video id="videoPlayer" autoplay playsinline style="display:none;"></video>
+        </div>
+
+        <div id="streamInfo" class="stream-info">
+            <h2 id="eventTitle">Live Coverage</h2>
+            <p id="eventDesc">Watch live video coverage from Conquest Artz</p>
+            <div class="status">
+                <span id="statusDot" class="dot offline"></span>
+                <span id="statusText" class="offline-text">Stream Offline</span>
+            </div>
+            <a class="back-btn" onclick="logout()">← Exit & Use Another Code</a>
+        </div>
+
+        <!-- BROADCAST CONTROLS -->
+        <div id="broadcastControls" class="broadcast-controls">
+            <h3>Broadcast Controls</h3>
+            <p>Start streaming from your camera and microphone</p>
+            <div class="btn-group">
+                <button class="btn-start" id="startBroadcastBtn" onclick="startBroadcast()">▶ Start Streaming</button>
+                <button class="btn-stop" id="stopBroadcastBtn" onclick="stopBroadcast()" disabled>⏹ Stop Streaming</button>
+            </div>
+            <div id="broadcastStatus">Ready to broadcast</div>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        &copy; 2026 Conquest Artz &amp; Design. All Rights Reserved.
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <!-- Load Socket.IO from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js">
+    </script>
+
+    <script>
+        // Check if Socket.IO loaded
+        if (typeof io === 'undefined') {
+            console.warn('Socket.IO not loaded from primary CDN, trying fallback...');
+            document.write('<script src="https://cdn.jsdelivr.net/npm/socket.io-client@4.7.2/dist/socket.io.min.js"><\/script>');
+            setTimeout(function() {
+                if (typeof io === 'undefined') {
+                    alert('❌ Socket.IO failed to load. Please check your internet connection and refresh the page.');
+                    console.error('Socket.IO still not loaded!');
+                } else {
+                    console.log('✅ Socket.IO loaded successfully from fallback!');
+                }
+            }, 1000);
+        } else {
+            console.log('✅ Socket.IO loaded successfully!');
+        }
+
+        // =============================================
+        // 🔐 CONFIG
+        // =============================================
+        const ADMIN_PASSWORD = "CONquest12."; // CHANGE THIS!
+        const SIGNALING_SERVER = "https://conquest-stream-server.onrender.com"; // Your Render URL
+
+        // =============================================
+        // 📋 EVENTS (from localStorage)
+        // =============================================
+        function loadEvents() {
+            try {
+                const stored = localStorage.getItem('conquestLinks');
+                if (stored) {
+                    const links = JSON.parse(stored);
+                    const events = {};
+                    links.forEach(item => {
+                        events[item.code] = {
+                            client: item.client,
+                            event: item.event,
+                            active: true
+                        };
+                    });
+                    return events;
+                }
+            } catch (e) {
+                console.log('Error loading events:', e);
+            }
+            return {
+                "DEMO123": { client: "Demo Client", event: "Demo Stream", active: true }
+            };
+        }
+
+        let EVENTS = loadEvents();
+
+        // =============================================
+        // 🎬 STATE
+        // =============================================
+        let currentCode = null;
+        let isAdmin = false;
+        let localStream = null;
+        let peerConnection = null;
+        let socket = null;
+        const roomId = 'conquest-live';
+
+        // =============================================
+        // 🔍 CODE VERIFICATION
+        // =============================================
+        function verifyCode(code) {
+            if (EVENTS[code] && EVENTS[code].active) {
+                return { valid: true, client: EVENTS[code].client, event: EVENTS[code].event };
+            }
+            return { valid: false };
+        }
+
+        // =============================================
+        // 🚀 ACCESS FUNCTIONS
+        // =============================================
+
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const codeParam = urlParams.get('code');
+
+            if (codeParam) {
+                document.getElementById('accessCode').value = codeParam;
+                verifyAccess();
+            }
+
+            document.getElementById('accessCode').focus();
+        };
+
+        function verifyAccess() {
+            const input = document.getElementById('accessCode');
+            const code = input.value.trim().toUpperCase();
+            const errorMsg = document.getElementById('errorMsg');
+
+            errorMsg.style.display = 'none';
+
+            if (!code) {
+                errorMsg.textContent = 'Please enter an access code.';
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            const result = verifyCode(code);
+
+            if (result.valid) {
+                localStorage.setItem('accessCode', code);
+                currentCode = code;
+                showVideo(code, result);
+            } else {
+                errorMsg.textContent = '❌ Invalid or expired access code.';
+                errorMsg.style.display = 'block';
+                localStorage.removeItem('accessCode');
+            }
+        }
+
+        function showVideo(code, result) {
+            document.getElementById('accessContainer').classList.add('hidden');
+
+            const videoContainer = document.getElementById('videoContainer');
+            videoContainer.style.display = 'block';
+
+            const streamInfo = document.getElementById('streamInfo');
+            streamInfo.style.display = 'block';
+
+            document.getElementById('eventTitle').textContent = `🎥 ${result.event} - ${result.client}`;
+            document.getElementById('eventDesc').textContent = `Live coverage for ${result.client}`;
+
+            const player = document.getElementById('videoPlayer');
+            player.style.display = 'block';
+            document.getElementById('offlineMsg').style.display = 'none';
+
+            const url = new URL(window.location);
+            url.searchParams.set('code', code);
+            window.history.pushState({}, '', url);
+
+            updateBadge(false);
+
+            if (isAdmin) {
+                document.getElementById('broadcastControls').style.display = 'block';
+            }
+
+            if (!isAdmin) {
+                connectAsViewer();
+            }
+        }
+
+        function updateBadge(isLive) {
+            const badge = document.getElementById('liveBadge');
+            const statusDot = document.getElementById('statusDot');
+            const statusText = document.getElementById('statusText');
+
+            if (isLive) {
+                badge.className = 'live-badge';
+                badge.textContent = '● LIVE';
+                statusDot.className = 'dot';
+                statusText.className = 'live-text';
+                statusText.textContent = 'Live Now';
+            } else {
+                badge.className = 'offline-badge';
+                badge.textContent = '● OFFLINE';
+                statusDot.className = 'dot offline';
+                statusText.className = 'offline-text';
+                statusText.textContent = 'Stream Offline';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('accessCode');
+            currentCode = null;
+
+            if (socket) {
+                socket.disconnect();
+                socket = null;
+            }
+
+            stopBroadcast();
+
+            document.getElementById('videoContainer').style.display = 'none';
+            document.getElementById('streamInfo').style.display = 'none';
+            document.getElementById('accessContainer').classList.remove('hidden');
+            document.getElementById('accessCode').value = '';
+            document.getElementById('broadcastControls').style.display = 'none';
+
+            const url = new URL(window.location);
+            url.searchParams.delete('code');
+            window.history.pushState({}, '', url);
+
+            document.getElementById('videoPlayer').style.display = 'none';
+            document.getElementById('videoPlayer').srcObject = null;
+            document.getElementById('offlineMsg').style.display = 'block';
+
+            updateBadge(false);
+            document.getElementById('accessCode').focus();
+        }
+
+        document.getElementById('accessCode').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') verifyAccess();
+        });
+
+        // =============================================
+        // 🔑 ADMIN PASSWORD
+        // =============================================
+        function verifyAdminPassword() {
+            const input = document.getElementById('adminPasswordInput');
+            const error = document.getElementById('adminError');
+
+            if (input.value === ADMIN_PASSWORD) {
+                isAdmin = true;
+                error.style.display = 'none';
+                input.value = '';
+                document.getElementById('broadcastControls').style.display = 'block';
+                document.getElementById('adminPasswordSection').style.display = 'none';
+                showToast('✅ Admin access granted! You can now broadcast.');
+            } else {
+                error.style.display = 'block';
+                input.value = '';
+                input.focus();
+            }
+        }
+
+        document.getElementById('adminPasswordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') verifyAdminPassword();
+        });
+
+        // =============================================
+        // 🎥 VIEWER CONNECTION
+        // =============================================
+        function connectAsViewer() {
+            if (!SIGNALING_SERVER) {
+                console.warn('No signaling server configured');
+                showToast('❌ Signaling server not configured');
+                return;
+            }
+
+            try {
+                console.log('📡 Connecting to signaling server:', SIGNALING_SERVER);
+                socket = io(SIGNALING_SERVER, {
+                    transports: ['websocket', 'polling'],
+                    reconnection: true,
+                    reconnectionAttempts: 5
+                });
+
+                socket.on('connect', () => {
+                    console.log('🔗 Connected to signaling server as viewer');
+                    showToast('📡 Connected to server!');
+                    socket.emit('join-room', roomId);
+                });
+
+                socket.on('connect_error', (err) => {
+                    console.error('❌ Connection error:', err);
+                    showToast('❌ Failed to connect to signaling server');
+                });
+
+                socket.on('broadcaster-ready', () => {
+                    console.log('📡 Broadcaster is ready!');
+                    showToast('📡 Broadcaster is live!');
+                    socket.emit('request-stream', roomId);
+                });
+
+                socket.on('broadcaster-left', () => {
+                    console.log('📴 Broadcaster left');
+                    showToast('📴 Broadcaster stopped streaming');
+                    document.getElementById('offlineMsg').style.display = 'block';
+                    document.getElementById('videoPlayer').style.display = 'none';
+                    updateBadge(false);
+                });
+
+                socket.on('offer', async (data) => {
+                    console.log('📤 Received offer from broadcaster');
+                    await handleOffer(data);
+                });
+
+                socket.on('ice-candidate', async (data) => {
+                    if (peerConnection) {
+                        try {
+                            await peerConnection.addIceCandidate(new RTCIceCandidate(data.candidate));
+                            console.log('✅ ICE candidate added');
+                        } catch (e) {
+                            console.error('Error adding ICE candidate:', e);
+                        }
+                    }
+                });
+
+            } catch (err) {
+                console.error('Error connecting as viewer:', err);
+                showToast('❌ Connection failed: ' + err.message);
+            }
+        }
+
+        async function handleOffer(data) {
+            try {
+                const pc = new RTCPeerConnection({
+                    iceServers: [
+                        { urls: 'stun:stun.l.google.com:19302' },
+                        { urls: 'stun:stun1.l.google.com:19302' },
+                        { urls: 'stun:stun2.l.google.com:19302' }
+                    ]
+                });
+
+                pc.ontrack = (event) => {
+                    const player = document.getElementById('videoPlayer');
+                    player.srcObject = event.streams[0];
+                    player.style.display = 'block';
+                    document.getElementById('offlineMsg').style.display = 'none';
+                    updateBadge(true);
+                    showToast('📺 You are now watching the live stream!');
+                };
+
+                pc.onicecandidate = (event) => {
+                    if (event.candidate) {
+                        socket.emit('ice-candidate', {
+                            target: data.sender,
+                            candidate: event.candidate
+                        });
+                    }
+                };
+
+                pc.onconnectionstatechange = () => {
+                    console.log('Viewer connection state:', pc.connectionState);
+                };
+
+                await pc.setRemoteDescription(new RTCSessionDescription(data.sdp));
+                const answer = await pc.createAnswer();
+                await pc.setLocalDescription(answer);
+
+                socket.emit('answer', {
+                    target: data.sender,
+                    sdp: answer
+                });
+
+                peerConnection = pc;
+                console.log('✅ Answer sent to broadcaster');
+
+            } catch (err) {
+                console.error('Error handling offer:', err);
+                showToast('❌ Error connecting to stream');
+            }
+        }
+
+        // =============================================
+        // 🎥 BROADCAST FUNCTIONS
+        // =============================================
+
+        async function startBroadcast() {
+            const status = document.getElementById('broadcastStatus');
+            const startBtn = document.getElementById('startBroadcastBtn');
+            const stopBtn = document.getElementById('stopBroadcastBtn');
+
+            try {
+                status.textContent = '📷 Accessing camera...';
+                status.style.color = '#888';
+                startBtn.disabled = true;
+
+                localStream = await navigator.mediaDevices.getUserMedia({
+                    video: { width: { ideal: 1280 }, height: { ideal: 720 } },
+                    audio: true
+                });
+
+                const player = document.getElementById('videoPlayer');
+                player.srcObject = localStream;
+                player.style.display = 'block';
+                player.muted = true;
+                document.getElementById('offlineMsg').style.display = 'none';
+
+                status.textContent = '📡 Connecting to signaling server...';
+
+                socket = io(SIGNALING_SERVER, {
+                    transports: ['websocket', 'polling']
+                });
+
+                socket.on('connect', () => {
+                    console.log('🔗 Connected to signaling server as broadcaster');
+                    socket.emit('broadcaster-ready', roomId);
+                    status.textContent = '🔴 Broadcasting live!';
+                    status.style.color = '#e50914';
+                    updateBadge(true);
+                    startBtn.disabled = true;
+                    stopBtn.disabled = false;
+                    showToast('📡 You are now live!');
+                });
+
+                socket.on('connect_error', (err) => {
+                    console.error('❌ Connection error:', err);
+                    status.textContent = '❌ Failed to connect to server';
+                    status.style.color = '#e50914';
+                    startBtn.disabled = false;
+                    showToast('❌ Failed to connect to signaling server');
+                });
+
+                socket.on('request-stream', async (viewerId) => {
+                    console.log('👤 Viewer requested stream:', viewerId);
+                    await createOffer(viewerId);
+                });
+
+                socket.on('answer', async (data) => {
+                    if (peerConnection) {
+                        try {
+                            await peerConnection.setRemoteDescription(new RTCSessionDescription(data.sdp));
+                            console.log('✅ Remote description set');
+                        } catch (e) {
+                            console.error('Error setting remote description:', e);
+                        }
+                    }
+                });
+
+                socket.on('ice-candidate', async (data) => {
+                    if (peerConnection) {
+                        try {
+                            await peerConnection.addIceCandidate(new RTCIceCandidate(data.candidate));
+                            console.log('✅ ICE candidate added');
+                        } catch (e) {
+                            console.error('Error adding ICE candidate:', e);
+                        }
+                    }
+                });
+
+            } catch (err) {
+                console.error('Error starting broadcast:', err);
+                status.textContent = '❌ Error: ' + err.message;
+                status.style.color = '#e50914';
+                startBtn.disabled = false;
+                showToast('❌ Failed to start broadcast: ' + err.message);
+            }
+        }
+
+        async function createOffer(targetId) {
+            if (!localStream) return;
+
+            try {
+                const pc = new RTCPeerConnection({
+                    iceServers: [
+                        { urls: 'stun:stun.l.google.com:19302' },
+                        { urls: 'stun:stun1.l.google.com:19302' },
+                        { urls: 'stun:stun2.l.google.com:19302' }
+                    ]
+                });
+
+                localStream.getTracks().forEach(track => {
+                    pc.addTrack(track, localStream);
+                });
+
+                pc.onicecandidate = (event) => {
+                    if (event.candidate) {
+                        socket.emit('ice-candidate', {
+                            target: targetId,
+                            candidate: event.candidate
+                        });
+                    }
+                };
+
+                pc.onconnectionstatechange = () => {
+                    console.log('Broadcaster connection state:', pc.connectionState);
+                };
+
+                const offer = await pc.createOffer();
+                await pc.setLocalDescription(offer);
+
+                socket.emit('offer', {
+                    target: targetId,
+                    sdp: offer
+                });
+
+                peerConnection = pc;
+                console.log('✅ Offer sent to viewer');
+
+            } catch (err) {
+                console.error('Error creating offer:', err);
+            }
+        }
+
+        function stopBroadcast() {
+            const status = document.getElementById('broadcastStatus');
+            const startBtn = document.getElementById('startBroadcastBtn');
+            const stopBtn = document.getElementById('stopBroadcastBtn');
+
+            if (localStream) {
+                localStream.getTracks().forEach(track => track.stop());
+                localStream = null;
+            }
+
+            if (peerConnection) {
+                peerConnection.close();
+                peerConnection = null;
+            }
+
+            if (socket) {
+                socket.disconnect();
+                socket = null;
+            }
+
+            const player = document.getElementById('videoPlayer');
+            player.srcObject = null;
+            player.style.display = 'none';
+            document.getElementById('offlineMsg').style.display = 'block';
+
+            status.textContent = '⏹ Broadcast stopped';
+            status.style.color = '#888';
+            startBtn.disabled = false;
+            stopBtn.disabled = true;
+            updateBadge(false);
+
+            showToast('⏹ Broadcast ended');
+        }
+
+        // =============================================
+        // 🔔 TOAST NOTIFICATION
+        // =============================================
+        function showToast(message) {
+            const existing = document.querySelector('.toast');
+            if (existing) existing.remove();
+
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s';
+                setTimeout(() => toast.remove(), 500);
+            }, 4000);
+        }
+
+        // =============================================
+        // 🚀 INIT
+        // =============================================
+        console.log('🎬 Conquest Artz Live Stream Ready!');
+        console.log('🔑 Admin password:', ADMIN_PASSWORD);
+        console.log('📋 Events loaded:', Object.keys(EVENTS).length);
+        console.log('📡 Signaling server:', SIGNALING_SERVER);
+    </script>
+
+</body>
+</html>

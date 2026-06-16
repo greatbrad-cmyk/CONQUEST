@@ -1,200 +1,912 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keyword"content="Conquest etinan, Graphics design etinan, Printing etinan, frames and faces etinan. christ embassy conquest">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keyword" content="Conquest etinan, Graphics design etinan, Printing etinan, frames and faces etinan, christ embassy conquest" />
     <title>CONQUEST Artz & Design | Creative Brand In Etinan</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
-    <link rel="stylesheet" content="stylesheet" href="main.css"
-   
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" />
+    <style>
+        /* ===== ROOT VARIABLES ===== */
+        :root {
+            --gold: #d4a843;
+            --gold-light: #f0d080;
+            --gold-dark: #b8922f;
+            --dark: #0a0a0a;
+            --dark-card: #121212;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text: #f5f5f5;
+            --text-muted: #aaa;
+            --shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            --radius: 20px;
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 10px;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ===== WELCOME OVERLAY ===== */
+        #welcome-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        #welcome-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        #welcome-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.5) saturate(1.2);
+        }
+
+        .video-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .video-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: #fff;
+            text-shadow: 0 0 60px rgba(212, 168, 67, 0.3);
+            letter-spacing: 8px;
+            margin-bottom: 12px;
+        }
+
+        .video-content .subtitle {
+            color: var(--gold);
+            font-size: 1.1rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+
+        .enter-btn {
+            padding: 14px 50px;
+            border: 2px solid var(--gold);
+            background: transparent;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enter-btn:hover {
+            background: var(--gold);
+            color: #000;
+            box-shadow: 0 0 40px rgba(212, 168, 67, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            text-align: center;
+            padding: 40px 20px 20px;
+            background: linear-gradient(180deg, var(--dark) 0%, rgba(212, 168, 67, 0.05) 100%);
+            border-bottom: 1px solid rgba(212, 168, 67, 0.15);
+            position: relative;
+        }
+
+        header .logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin: 0 auto 12px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            padding: 6px;
+            background: rgba(212, 168, 67, 0.05);
+            transition: var(--transition);
+        }
+
+        header .logo:hover {
+            transform: rotate(8deg) scale(1.05);
+            border-color: var(--gold-light);
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: #fff;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #fff 30%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: var(--gold);
+            letter-spacing: 6px;
+            font-weight: 300;
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+
+        /* ===== NAV ===== */
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 16px 20px;
+            background: rgba(18, 18, 18, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 168, 67, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            padding: 8px 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            border-radius: 50px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+
+        nav a:hover {
+            color: #fff;
+        }
+
+        nav a:hover::after {
+            width: 60%;
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 48px;
+            color: #fff;
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--gold);
+            margin: 12px auto 0;
+            border-radius: 10px;
+        }
+
+        /* ===== REVEAL ANIMATION ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== SLIDER ===== */
+        .slider {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            aspect-ratio: 16 / 7;
+            background: #111;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1.2s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.6) saturate(1.1);
+        }
+
+        .slide-text {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            padding: 14px 36px;
+            border-radius: 50px;
+            border: 1px solid rgba(212, 168, 67, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .slide-text p {
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+
+        /* ===== ABOUT ===== */
+        #about > div {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius);
+            padding: 50px;
+            backdrop-filter: blur(4px);
+        }
+
+        #about h2 {
+            font-size: 1.6rem;
+            text-align: left;
+            margin-bottom: 12px;
+            color: var(--gold);
+        }
+
+        #about h2::after {
+            margin: 8px 0 0;
+            width: 50px;
+        }
+
+        #about p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* ===== ECOSYSTEM ===== */
+        .subs-vertical {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 10px;
+        }
+
+        .sub-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 24px 28px;
+            border-radius: var(--radius);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: var(--transition);
+        }
+
+        .sub-item:hover {
+            background: rgba(212, 168, 67, 0.06);
+            border-color: rgba(212, 168, 67, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .sub-item i {
+            font-size: 2rem;
+            color: var(--gold);
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        .sub-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+            color: #fff;
+        }
+
+        .sub-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* ===== SERVICES GRID ===== */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+        }
+
+        .card {
+            background: var(--dark-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(212, 168, 67, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .image-container {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .card:hover .image-container img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 22px 24px 26px;
+        }
+
+        .card-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 6px;
+            color: #fff;
+        }
+
+        .card-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* ===== GALLERY ===== */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            border-color: var(--gold);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 1rem;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .contact-info i {
+            width: 28px;
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 14px 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .contact-form .btn {
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background: var(--gold);
+            color: #000;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .contact-form .btn:hover {
+            background: var(--gold-light);
+            transform: scale(1.02);
+            box-shadow: 0 0 40px rgba(212, 168, 67, 0.2);
+        }
+
+        /* ===== CEO SECTION ===== */
+        .ceo-section {
+            background: radial-gradient(circle at 30% 30%, rgba(212, 168, 67, 0.05), transparent 70%);
+            padding: 60px 24px;
+            border-top: 1px solid rgba(212, 168, 67, 0.08);
+            border-bottom: 1px solid rgba(212, 168, 67, 0.08);
+        }
+
+        .ceo-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .ceo-image-container {
+            position: relative;
+            width: 260px;
+            height: 260px;
+            flex-shrink: 0;
+        }
+
+        .ceo-image-container .ring {
+            position: absolute;
+            inset: -10px;
+            border: 2px dashed var(--gold);
+            border-radius: 50%;
+            animation: spin 25s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .ceo-image-container .img-wrap {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid rgba(212, 168, 67, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .ceo-image-container .img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ceo-image-container .badge {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            border: 4px solid var(--dark);
+            font-size: 1.4rem;
+            color: #000;
+        }
+
+        .ceo-content blockquote {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 3px solid var(--gold);
+        }
+
+        .ceo-content h4 {
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+
+        .ceo-content .title {
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .video-content h2 {
+                font-size: 2.5rem;
+                letter-spacing: 4px;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+            section {
+                padding: 50px 16px;
+            }
+            section h2 {
+                font-size: 2rem;
+            }
+            .slider {
+                aspect-ratio: 16 / 10;
+            }
+            .slide-text p {
+                font-size: 0.9rem;
+            }
+            #about > div {
+                padding: 28px;
+            }
+            .ceo-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .ceo-image-container {
+                width: 200px;
+                height: 200px;
+            }
+            .ceo-content blockquote {
+                border-left: none;
+                padding-left: 0;
+                border-top: 2px solid var(--gold);
+                padding-top: 20px;
+            }
+            nav a {
+                padding: 6px 14px;
+                font-size: 0.7rem;
+            }
+            .gallery {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .video-content h2 {
+                font-size: 1.8rem;
+            }
+            header h1 {
+                font-size: 1.6rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .subs-vertical {
+                grid-template-columns: 1fr;
+            }
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
 </head>
 <body>
 
+    <!-- ===== WELCOME OVERLAY ===== -->
     <div id="welcome-overlay">
-    <video id="welcome-video" autoplay muted loop playsinline>
-        <source src="welcome.mp4" type="video/mp4"> Your browser does not support the video tag.
-    </video>
-    <div class="video-content">
-        <h2 style="color: rgb(255, 255, 255); margin-bottom: 20px; font-size: 2.5rem;">CONQUEST</h2>
-        <button class="enter-btn" onclick="enterSite()">Skip</button>
-    </div>
-</div>
-
-
-<header>
-    <img src="logo 1.png" class="logo" alt="Conquest">
-    <h1>CONQUEST</h1>
-    <p style="color: var(--gold); letter-spacing: 3px;">ACHIEVING GREATNESS</p>
-</header>
-
-<nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#subsidairies">Ecosystem</a>
-    <a href="#services">Services</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#contact">Contact</a>
-</nav>
-
-<section id="home" class="reveal">
-    <div class="slider" id="mainSlider">
-        <div class="slide active"><img src="home1.png" alt="1"><div class="slide-text"><p>Premium Graphic Design & Framing</p></div></div>
-        <div class="slide"><img src="home.png" alt="2"><div class="slide-text"><p>Your Vision, Our Masterpiece</p></div></div>
-        <div class="slide"><img src="camera.png" alt="3"><div class="slide-text"><p>Exceptional Top Notch Services</p></div></div>
-    </div>
-</section>
-
-<section id="about" class="reveal">
-    <div style="background: var(--glass); padding: 40px; border-radius: 20px;">
-        <div style="display: flex; gap: 50px; flex-wrap: wrap;">
-            <div style="flex: 1; min-width: 300px;">
-                <h2 style="text-align: left;">Our Mission</h2>
-                <p>Meeting the Needs And Wants Of Our Potential Customers.</p>
-            </div>    
-            <div style="flex: 1; min-width: 300px;">
-                <h2 style="text-align: left;">Our Vision</h2>
-                <p>To provide the best customer service possible and to deliver an unmatched service in the best possible way.</p>
-            </div>
+        <video id="welcome-video" autoplay muted loop playsinline>
+            <source src="welcome.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-content">
+            <h2>CONQUEST</h2>
+            <p class="subtitle">Achieving Greatness</p>
+            <button class="enter-btn" onclick="enterSite()">Enter</button>
         </div>
     </div>
-</section>
 
-<section id="subsidairies" class="reveal">
-    <h2>Conquest Ecosystem</h2>
-    <div class="subs-vertical">
-        <div class="sub-item">
-            <i class="fas fa-palette" style="color: darkgoldenrod;"></i>
+    <!-- ===== HEADER ===== -->
+    <header>
+        <img src="logo 1.png" class="logo" alt="Conquest" />
+        <h1>CONQUEST</h1>
+        <p>ACHIEVING GREATNESS</p>
+    </header>
+
+    <!-- ===== NAV ===== -->
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#subsidairies">Ecosystem</a>
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+        
+    </nav>
+
+    <!-- ===== HOME / SLIDER ===== -->
+    <section id="home" class="reveal">
+        <div class="slider" id="mainSlider">
+            <div class="slide active"><img src="home1.png" alt="1" /><div class="slide-text"><p>Premium Graphic Design &amp; Framing</p></div></div>
+            <div class="slide"><img src="home.png" alt="2" /><div class="slide-text"><p>Your Vision, Our Masterpiece</p></div></div>
+            <div class="slide"><img src="camera.png" alt="3" /><div class="slide-text"><p>Exceptional Top Notch Services</p></div></div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about" class="reveal">
+        <div style="display:flex; gap:50px; flex-wrap:wrap;">
+            <div style="flex:1; min-width:260px;">
+                <h2>Our Mission</h2>
+                <p>Meeting the needs and wants of our potential customers with excellence and creativity.</p>
+            </div>
+            <div style="flex:1; min-width:260px;">
+                <h2>Our Vision</h2>
+                <p>To provide the best customer service possible and deliver an unmatched experience in every project.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ECOSYSTEM ===== -->
+    <section id="subsidairies" class="reveal">
+        <h2>Conquest Ecosystem</h2>
+        <div class="subs-vertical">
+            <div class="sub-item">
+                <i class="fas fa-palette"></i>
+                <div>
+                    <h4>Conquest Media</h4>
+                    <p>Strategic graphic design and branding solutions that tell your story.</p>
+                </div>
+            </div>
+            <div class="sub-item">
+                <i class="fas fa-print"></i>
+                <div>
+                    <h4>Conquest Prints</h4>
+                    <p>High-quality customized T-shirt printing and professional branding skills.</p>
+                </div>
+            </div>
+            <div class="sub-item">
+                <i class="fas fa-couch"></i>
+                <div>
+                    <h4>Conquest Frames &amp; Face</h4>
+                    <p>Premium picture framing and modern window blind installations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section id="services" class="reveal">
+        <h2>What We Offer</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="image-container"><img src="Services1.png" alt="Design" /></div>
+                <div class="card-content"><h3>Graphic Design</h3><p>Exceptional branding and event designs that capture your unique story.</p></div>
+            </div>
+            <div class="card">
+                <div class="image-container"><img src="IMG-20260212-WA0063.jpg" alt="Framing" /></div>
+                <div class="card-content"><h3>Picture Framing</h3><p>Professional framing of all sizes to preserve your cherished memories.</p></div>
+            </div>
+            <div class="card">
+                <div class="image-container"><img src="printz.png" alt="Prints" /></div>
+                <div class="card-content"><h3>Prints on T-Shirts</h3><p>High-quality customized apparel with modern professional printing.</p></div>
+            </div>
+            <div class="card">
+                <div class="image-container"><img src="Awards.png" alt="Awards" /></div>
+                <div class="card-content"><h3>Awards Making</h3><p>Modern, classic, and professional awards to honor every achievement.</p></div>
+            </div>
+            <div class="card">
+                <div class="image-container"><img src="Home.jpeg" alt="Others" /></div>
+                <div class="card-content"><h3>...and lots more</h3><p>We offer other kinds of art services. Contact us for more details.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GALLERY ===== -->
+    <section id="gallery" class="reveal">
+        <h2>Brand Work</h2>
+        <div class="gallery">
+            <div class="gallery-item"><a href="work.png" data-lightbox="work"><img src="work.png" alt="W1" /></a></div>
+            <div class="gallery-item"><a href="work2.png" data-lightbox="work"><img src="work2.png" alt="W2" /></a></div>
+            <div class="gallery-item"><a href="work4.jpeg" data-lightbox="work"><img src="work4.jpeg" alt="W3" /></a></div>
+            <div class="gallery-item"><a href="Flyer CONQUEST (1).png" data-lightbox="work"><img src="Flyer CONQUEST (1).png" alt="W4" /></a></div>
+            <div class="gallery-item"><a href="gallery 2.jpg" data-lightbox="work"><img src="gallery 2.jpg" alt="W5" /></a></div>
+            <div class="gallery-item"><a href="home2.jpg" data-lightbox="work"><img src="home2.jpg" alt="W6" /></a></div>
+            <div class="gallery-item"><a href="wolrk12.jpg" data-lightbox="work"><img src="wolrk12.jpg" alt="W7" /></a></div>
+            <div class="gallery-item"><a href="work13.jpg" data-lightbox="work"><img src="work13.jpg" alt="W8" /></a></div>
+            <div class="gallery-item"><a href="doings.jpg" data-lightbox="work"><img src="doings.jpg" alt="W9" /></a></div>
+            <div class="gallery-item"><a href="work10.png" data-lightbox="work"><img src="work10.png" alt="W10" /></a></div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" class="reveal">
+        <h2>Get In Touch</h2>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:40px;">
+            <div class="contact-info">
+                <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/2348055299994">+234 805 5299 994</a></p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:conquest4greatness@gmail.com">conquest4greatness@gmail.com</a></p>
+                <p><i class="fas fa-phone"></i> 0704 450 5593, 0816 517 4497</p>
+                <p><i class="fas fa-location-dot"></i> Etinan Roundabout, Akwa Ibom State.</p>
+            </div>
+            <form action="https://formspree.io/f/xlgpbqgp" method="POST" class="contact-form">
+                <input type="text" name="name" placeholder="Full Name" required />
+                <input type="email" name="email" placeholder="Email Address" required />
+                <textarea name="message" placeholder="How can we help?" rows="5" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ===== CEO SECTION ===== -->
+    <section class="ceo-section reveal">
+        <div class="ceo-content">
+            <div class="ceo-image-container">
+                <div class="ring"></div>
+                <div class="img-wrap">
+                    <img src="ceopicture.jpeg" alt="CEO" />
+                </div>
+                <div class="badge"><i class="fas fa-crown"></i></div>
+            </div>
             <div>
-                <h4>Conquest Media</h4>
-                <p>Strategic graphic design and branding solutions.</p>
+                <i class="fas fa-quote-left" style="color:var(--gold); font-size:2.5rem; display:block; margin-bottom:16px;"></i>
+                <blockquote>"At CONQUEST, we believe that achieving greatness is a journey of precision and passion. We partner with you to turn your vision into an artistic masterpiece."</blockquote>
+                <h4>The Visionary</h4>
+                <span class="title">CEO, CONQUEST ARTZ &amp; DESIGN <br /> John Ajiboye</span>
             </div>
         </div>
-        <div class="sub-item">
-            <i class="fas fa-print" style="color: darkgoldenrod"></i>
-            <div>
-                <h4>Conquest Prints</h4>
-                <p>High-quality customized T-shirt printing and pro branding skills.</p>
-            </div>
-        </div>
-        <div class="sub-item">
-            <i class="fas fa-couch" style="color: darkgoldenrod"></i> <div>
-                <h4>Conquest Frames And Face</h4>
-                <p>Premium picture framing and modern window blind installations.</p>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
 
-<section id="services" class="reveal">
-    <h2>What We Offer</h2>
-    <div class="grid">
-        <div class="card">
-            <div class="image-container"><img src="Services1.png" alt="Design"></div>
-            <div class="card-content"><h3>Graphic Design</h3><p>Exceptional branding and event designs that capture your unique story.</p></div>
-        </div>
-        <div class="card">
-            <div class="image-container"><img src="IMG-20260212-WA0063.jpg" alt="Framing"></div>
-            <div class="card-content"><h3>Picture Framing</h3><p>Professional framing of all sizes to preserve your most cherished memories.</p></div>
-        </div>
-        <div class="card">
-            <div class="image-container"><img src="printz.png" alt="Prints"></div>
-            <div class="card-content"><h3>Prints on T-Shirts</h3><p>High-quality customized apparel featuring modern professional printing.</p></div>
-        </div>
-        <div class="card">
-            <div class="image-container"><img src="Awards.png" alt="Awards"></div>
-            <div class="card-content"><h3>Awards Making</h3><p>Modern, classic, and professional awards to honor every achievement.</p></div>
-        </div>
-        <div class="card">
-            <div class="image-container"><img src="Home.jpeg" alt="Others"></div>
-            <div class="card-content"><h3>...and lots more</h3><p>We offer other kinds of art services. Contact us for more details</p></div>
-        </div>
-    </div>
-</section>
+    <!-- ===== FOOTER ===== -->
+    <footer>&copy; 2026 CONQUEST Artz &amp; Design. All Rights Reserved.</footer>
 
-<section id="gallery" class="reveal">
-    <h2>Brand Work</h2>
-    <div class="gallery">
-        <div class="gallery-item"><a href="work.png" data-lightbox="work"><img src="work.png" alt="W1"></a></div>
-        <div class="gallery-item"><a href="work2.png" data-lightbox="work"><img src="work2.png" alt="W2"></a></div>
-        <div class="gallery-item"><a href="work4.jpeg" data-lightbox="work"><img src="work4.jpeg" alt="W3"></a></div>
-        <div class="gallery-item"><a href="Flyer CONQUEST (1).png" data-lightbox="work"><img src="Flyer CONQUEST (1).png" alt="W4"></a></div>
-        <div class="gallery-item"><a href="gallery 2.jpg" data-lightbox="work"><img src="gallery 2.jpg" alt="W5"></a></div>
-        <div class="gallery-item"><a href="home2.jpg" data-lightbox="work"><img src="home2.jpg" alt="W6"></a></div>
-        <div class="gallery-item"><a href="wolrk12.jpg" data-lightbox="work"><img src="wolrk12.jpg" alt="W7"></a></div>
-        <div class="gallery-item"><a href="work13.jpg" data-lightbox="work"><img src="work13.jpg" alt="W8"></a></div>
-        <div class="gallery-item"><a href="doings.jpg" data-lightbox="work"><img src="doings.jpg" alt="W9"></a></div>
-        <div class="gallery-item"><a href="work10.png" data-lightbox="work"><img src="work10.png" alt="W10"></a></div>
-    </div>
-</section>
-
-<section id="contact" class="reveal">
-    <h2>Get In Touch</h2>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px;">
-        <div class="contact-info">
-            <p><i class="fab fa-whatsapp" style="color:var(--gold);"></i> <a href="https://wa.me/2348055299994" style="color:white; text-decoration:none;">+234 805 5299 994</a></p><br>
-            <p><i class="fas fa-envelope" style="color:var(--gold);"></i> <a href="mailto:conquest4greatness@gmail.com" style="color:white; text-decoration:none;">conquest4greatness@gmail.com</a></p><br>
-            <p><i class="fas fa-phone" style="color:var(--gold);"></i> 0704 450 5593, 0816 517 4497 </p><br>
-            <p><i class="fas fa-location-dot" style="color:var(--gold);"></i> Etinan Roundabout, Akwa Ibom State.</p>
-        </div>
-        <form action="https://formspree.io/f/xlgpbqgp" method="POST" class="contact-form">
-            <input type="text" name="name" placeholder="Full Name" required>
-            <input type="email" name="email" placeholder="Email Address" required>
-            <textarea name="message" placeholder="How can we help?" rows="5" required></textarea>
-            <button type="submit" class="btn">Send Message</button>
-        </form>
-    </div>
-</section>
-
-<section class="ceo-section">
-    <div class="ceo-content" style="display: flex; align-items: center; justify-content: center; gap: 50px; flex-wrap: wrap; text-align: left; max-width: 1000px; margin: 0 auto;">
-        <div class="ceo-image-container" style="position: relative; width: 280px; height: 280px; flex-shrink: 0;">
-            <div style="position: absolute; inset: -10px; border: 2px dashed var(--gold); border-radius: 50%; animation: rotate 20s linear infinite;"></div>
-            <div style="width: 100%; height: 100%; border-radius: 50%; overflow: hidden; border: 5px solid #fff; box-shadow: 0 15px 35px rgba(0,0,0,0.1); position: relative; z-index: 2;">
-                <img src="ceopicture.jpeg" alt="CEO" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            <div style="position: absolute; bottom: 10px; right: 10px; background: var(--gold); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 3; border: 4px solid #fff;"><i class="fas fa-crown" style="color: #fff;"></i></div>
-        </div>
-        <div style="flex: 1; min-width: 300px;">
-            <i class="fas fa-quote-left" style="color: var(--gold); font-size: 2.5rem; display: block; margin-bottom: 20px;"></i>
-            <div style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 25px; color: #444; font-style: italic;">"At CONQUEST, we believe that achieving greatness is a journey of precision and passion. We partner with you to turn your vision into an artistic masterpiece."</div>
-            <h4 style="margin:0; font-size: 1.5rem;">The Visionary</h4>
-            <span style="color: var(--gold); font-weight: 800; text-transform: uppercase; font-size: 0.8rem;">CEO, CONQUEST ARTZ & DESIGN <br>John Ajiboye</br></span>
-        </div>
-    </div>
-</section>
-
-<footer>&copy; 2026 CONQUEST Artz & Design. All Rights Reserved.</footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
-<script>
-    let current = 0;
-    const slides = document.querySelectorAll('.slide');
-    setInterval(() => {
-        if(slides.length > 0){
-            slides[current].classList.remove('active');
-            current = (current + 1) % slides.length;
-            slides[current].classList.add('active');
+    <!-- ===== SCRIPTS ===== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script>
+        // ===== SLIDER =====
+        let current = 0;
+        const slides = document.querySelectorAll('.slide');
+        if (slides.length) {
+            setInterval(() => {
+                slides[current].classList.remove('active');
+                current = (current + 1) % slides.length;
+                slides[current].classList.add('active');
+            }, 5000);
         }
-    }, 5000);
 
-    function enterSite() {
-        const overlay = document.getElementById('welcome-overlay');
-        overlay.classList.add('hidden');
-        // Optional: Unmute video or start other animations here
-    }
+        // ===== WELCOME OVERLAY =====
+        function enterSite() {
+            const overlay = document.getElementById('welcome-overlay');
+            overlay.classList.add('hidden');
+        }
 
-    function reveal() {
-        document.querySelectorAll(".reveal").forEach(el => {
-            if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add("active");
+        // ===== REVEAL ON SCROLL =====
+        function reveal() {
+            document.querySelectorAll('.reveal').forEach(el => {
+                const top = el.getBoundingClientRect().top;
+                if (top < window.innerHeight - 80) {
+                    el.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', reveal);
+        window.addEventListener('load', reveal);
+
+        // ===== KEYBOARD SHORTCUT: Press 'Enter' to skip welcome =====
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !document.getElementById('welcome-overlay').classList.contains('hidden')) {
+                enterSite();
+            }
         });
-    }
-    window.addEventListener("scroll", reveal);
-    reveal();
-</script>
+    </script>
+
 </body>
 </html>
